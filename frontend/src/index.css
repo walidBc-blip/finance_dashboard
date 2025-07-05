@@ -1,0 +1,2177 @@
+/* Modern Finance Dashboard CSS */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8fafc;
+  color: #1a202c;
+  line-height: 1.6;
+}
+
+/* Loading Screen */
+.loading-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.loading-content {
+  text-align: center;
+  color: white;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error Screen */
+.error-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f7fafc;
+  padding: 2rem;
+}
+
+.error-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+}
+
+.error-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.error-help {
+  background: #f7fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
+.error-help code {
+  background: #e2e8f0;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-family: 'Monaco', 'Courier New', monospace;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+/* Dashboard Layout */
+.dashboard {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.dashboard-header {
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-icon {
+  font-size: 1.5rem;
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d3748;
+}
+
+/* Navigation Tabs */
+.nav-tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-tab {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #718096;
+}
+
+.nav-tab:hover {
+  background: #f7fafc;
+  color: #4a5568;
+}
+
+.nav-tab.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.user-name {
+  font-weight: 500;
+  color: #4a5568;
+}
+
+/* Main Content */
+.dashboard-main {
+  flex: 1;
+  padding: 2rem 0;
+}
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Welcome Section */
+.welcome-section {
+  margin-bottom: 2rem;
+}
+
+.welcome-section h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.welcome-section p {
+  color: #718096;
+  font-size: 1.125rem;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.stat-icon {
+  font-size: 2rem;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+.stat-card.income .stat-icon { background: #f0fff4; }
+.stat-card.expenses .stat-icon { background: #fef5e7; }
+.stat-card.savings .stat-icon { background: #e6fffa; }
+.stat-card.transactions .stat-icon { background: #ebf8ff; }
+
+.stat-content h3 {
+  font-size: 0.875rem;
+  color: #718096;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 0.25rem;
+}
+
+.stat-change {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.stat-change.positive { color: #38a169; }
+.stat-change.negative { color: #e53e3e; }
+.stat-change.neutral { color: #718096; }
+
+/* Content Grid */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.dashboard-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-card.full-width {
+  grid-column: 1 / -1;
+}
+
+.dashboard-card.chart-card {
+  min-height: 400px;
+}
+
+.card-header {
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid #f7fafc;
+}
+
+.card-header h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.25rem;
+}
+
+.card-subtitle {
+  font-size: 0.875rem;
+  color: #718096;
+}
+
+/* Chart Container */
+.chart-container {
+  padding: 1rem 1.5rem 1.5rem;
+}
+
+/* Categories List */
+.categories-list {
+  padding: 1rem 1.5rem 1.5rem;
+}
+
+.category-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f7fafc;
+  transition: background-color 0.2s;
+}
+
+.category-item:hover {
+  background-color: #f7fafc;
+  margin: 0 -1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.category-item:last-child {
+  border-bottom: none;
+}
+
+.category-item.enhanced {
+  padding: 1rem 0;
+}
+
+.category-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.category-emoji {
+  font-size: 1.25rem;
+}
+
+.category-details {
+  flex: 1;
+}
+
+.category-name {
+  font-weight: 500;
+  color: #4a5568;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.category-bar {
+  width: 100%;
+  height: 4px;
+  background-color: #e2e8f0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.category-progress {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+  transition: width 0.3s ease;
+}
+
+.category-amount {
+  text-align: right;
+}
+
+.amount {
+  display: block;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.percentage {
+  font-size: 0.75rem;
+  color: #718096;
+}
+
+/* Health Score */
+.health-score {
+  padding: 1rem 1.5rem 1.5rem;
+  text-align: center;
+}
+
+.score-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: white;
+}
+
+.score-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.score-label {
+  font-size: 0.75rem;
+  opacity: 0.9;
+}
+
+.health-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.health-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.health-label {
+  font-size: 0.875rem;
+  color: #718096;
+}
+
+.health-value {
+  font-weight: 500;
+  color: #4a5568;
+}
+
+/* Actions Grid */
+.actions-grid {
+  padding: 1rem 1.5rem 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.action-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.action-button.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.action-button.secondary {
+  background: #f7fafc;
+  color: #4a5568;
+  border: 1px solid #e2e8f0;
+}
+
+.action-button:hover {
+  transform: translateY(-1px);
+}
+
+.action-button.primary:hover {
+  box-shadow: 0 4px 6px rgba(102, 126, 234, 0.25);
+}
+
+.action-button.secondary:hover {
+  background: #edf2f7;
+}
+
+.action-icon {
+  font-size: 1.25rem;
+}
+
+/* Insights List */
+.insights-list {
+  padding: 1rem 1.5rem 1.5rem;
+}
+
+.insight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.insight-item:last-child {
+  margin-bottom: 0;
+}
+
+.insight-item.positive {
+  background: #f0fff4;
+  border-left: 4px solid #38a169;
+}
+
+.insight-item.warning {
+  background: #fef5e7;
+  border-left: 4px solid #ed8936;
+}
+
+.insight-item.info {
+  background: #ebf8ff;
+  border-left: 4px solid #3182ce;
+}
+
+.insight-icon {
+  font-size: 1.25rem;
+  margin-top: 0.125rem;
+}
+
+.insight-content h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.25rem;
+}
+
+.insight-content p {
+  font-size: 0.875rem;
+  color: #4a5568;
+  line-height: 1.4;
+}
+
+/* Transaction Placeholder */
+.transaction-placeholder {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.placeholder-content {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.placeholder-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.placeholder-content h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+.placeholder-content p {
+  color: #718096;
+  margin-bottom: 1rem;
+}
+
+.placeholder-content ul {
+  text-align: left;
+  color: #4a5568;
+  font-size: 0.875rem;
+}
+
+.placeholder-content li {
+  margin-bottom: 0.5rem;
+}
+
+/* Summary Grid */
+.summary-grid {
+  padding: 1rem 1.5rem 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.summary-item {
+  text-align: center;
+}
+
+.summary-item h4 {
+  font-size: 0.875rem;
+  color: #718096;
+  margin-bottom: 0.5rem;
+}
+
+.summary-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.summary-value.positive {
+  color: #38a169;
+}
+
+/* Success Banner */
+.success-banner {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  border-radius: 12px;
+  color: white;
+  overflow: hidden;
+}
+
+.banner-content {
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.banner-icon {
+  font-size: 2rem;
+}
+
+.banner-text {
+  flex: 1;
+}
+
+.banner-text h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.banner-text p {
+  opacity: 0.9;
+  font-size: 0.875rem;
+}
+
+.banner-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 0 1rem;
+  }
+  
+  .header-content {
+    padding: 0 1rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .nav-tabs {
+    order: 1;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .user-info {
+    order: 2;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .banner-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .actions-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* Add this to the end of your existing CSS file */
+
+/* PowerBI Styles */
+.powerbi-dashboard {
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
+.powerbi-header {
+  background: white;
+  border-bottom: 1px solid #e1e5e9;
+  padding: 1.5rem 0;
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #323130;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.powerbi-logo {
+  font-size: 1.75rem;
+}
+
+.dashboard-subtitle {
+  color: #605e5c;
+  font-size: 0.875rem;
+}
+
+.dashboard-stats {
+  display: flex;
+  gap: 2rem;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.75rem;
+  color: #8a8886;
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #323130;
+}
+
+/* PowerBI Navigation */
+.powerbi-navigation {
+  background: white;
+  border-bottom: 1px solid #e1e5e9;
+  padding: 1rem 0;
+}
+
+.nav-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e1e5e9;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nav-tab:hover {
+  border-color: #0078d4;
+  background: #f3f9fd;
+}
+
+.nav-tab.active {
+  border-color: #0078d4;
+  background: #0078d4;
+  color: white;
+}
+
+.tab-icon {
+  font-size: 1.25rem;
+}
+
+.tab-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.tab-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.tab-description {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+/* Global Filters */
+.global-filters {
+  display: flex;
+  gap: 1rem;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.filter-group label {
+  font-size: 0.75rem;
+  color: #605e5c;
+  font-weight: 500;
+}
+
+.filter-select {
+  padding: 0.5rem;
+  border: 1px solid #e1e5e9;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  background: white;
+}
+
+/* PowerBI Container */
+.powerbi-container {
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #e1e5e9;
+  margin: 1.5rem auto;
+  max-width: 1400px;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  overflow: hidden;
+}
+
+.powerbi-content {
+  padding: 0;
+}
+
+/* PowerBI Toolbar */
+.powerbi-toolbar {
+  background: #f8f9fa;
+  border-bottom: 1px solid #e1e5e9;
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.powerbi-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.powerbi-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: #323130;
+}
+
+.powerbi-icon {
+  font-size: 1.25rem;
+}
+
+.powerbi-text {
+  font-size: 0.875rem;
+}
+
+.powerbi-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #323130;
+}
+
+.powerbi-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.powerbi-filter {
+  padding: 0.375rem 0.75rem;
+  border: 1px solid #e1e5e9;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+.powerbi-view-toggle {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.view-btn {
+  padding: 0.375rem 0.75rem;
+  border: 1px solid #e1e5e9;
+  background: white;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.view-btn:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.view-btn:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.view-btn.active {
+  background: #0078d4;
+  color: white;
+  border-color: #0078d4;
+}
+
+.powerbi-export {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.export-btn {
+  padding: 0.375rem 0.75rem;
+  border: 1px solid #e1e5e9;
+  background: white;
+  font-size: 0.75rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.export-btn:hover {
+  background: #f3f9fd;
+  border-color: #0078d4;
+}
+
+/* PowerBI Loading */
+.powerbi-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 1rem;
+}
+
+.powerbi-spinner {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.spinner-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 3px solid transparent;
+  border-top: 3px solid #0078d4;
+  border-radius: 50%;
+  animation: powerbi-spin 1s linear infinite;
+}
+
+.spinner-ring:nth-child(2) {
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  animation-delay: -0.1s;
+}
+
+.spinner-ring:nth-child(3) {
+  width: 60%;
+  height: 60%;
+  top: 20%;
+  left: 20%;
+  animation-delay: -0.2s;
+}
+
+@keyframes powerbi-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-bar {
+  width: 200px;
+  height: 4px;
+  background: #e1e5e9;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-progress {
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, #0078d4, #40e0d0);
+  animation: loading-slide 2s ease-in-out infinite;
+}
+
+@keyframes loading-slide {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(0%); }
+  100% { transform: translateX(100%); }
+}
+
+/* PowerBI Reports */
+.powerbi-report {
+  padding: 1.5rem;
+}
+
+.report-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #323130;
+  margin-bottom: 1rem;
+  border-left: 4px solid #0078d4;
+  padding-left: 0.75rem;
+}
+
+/* KPI Cards */
+.kpi-section {
+  grid-column: 1 / -1;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.kpi-card {
+  background: white;
+  border: 1px solid #e1e5e9;
+  border-radius: 4px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.kpi-icon {
+  font-size: 1.5rem;
+}
+
+.kpi-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.kpi-label {
+  font-size: 0.75rem;
+  color: #8a8886;
+  margin-bottom: 0.25rem;
+}
+
+.kpi-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #323130;
+  margin-bottom: 0.25rem;
+}
+
+.kpi-trend {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.kpi-trend.positive { color: #107c10; }
+.kpi-trend.negative { color: #d13438; }
+
+/* PowerBI Footer */
+.powerbi-footer {
+  background: #f8f9fa;
+  border-top: 1px solid #e1e5e9;
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.last-refresh {
+  font-size: 0.75rem;
+  color: #8a8886;
+}
+
+/* PowerBI CSS Styles - Add this to the end of your src/index.css */
+
+/* PowerBI Footer (continued) */
+.refresh-btn {
+  padding: 0.375rem 0.75rem;
+  background: #0078d4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.refresh-btn:hover {
+  background: #106ebe;
+}
+
+/* Chart Visualizations */
+.powerbi-chart-placeholder {
+  background: #fafbfc;
+  border: 1px solid #e1e5e9;
+  border-radius: 4px;
+  padding: 1rem;
+  min-height: 250px;
+}
+
+.chart-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.bar-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bar-label {
+  min-width: 100px;
+  font-size: 0.875rem;
+  color: #323130;
+  font-weight: 500;
+}
+
+.bar-container {
+  flex: 1;
+  height: 20px;
+  background: #e1e5e9;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+.bar-value {
+  min-width: 80px;
+  text-align: right;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #323130;
+}
+
+/* Insights Section */
+.insights-section {
+  background: #fafbfc;
+  border: 1px solid #e1e5e9;
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+.insights-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.insight-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 4px;
+  border-left: 4px solid transparent;
+}
+
+.insight-item .insight-icon.positive {
+  color: #107c10;
+}
+
+.insight-item .insight-icon.warning {
+  color: #ffaa44;
+}
+
+.insight-item .insight-icon.info {
+  color: #0078d4;
+}
+
+.insight-item.positive {
+  border-left-color: #107c10;
+}
+
+.insight-item.warning {
+  border-left-color: #ffaa44;
+}
+
+.insight-item.info {
+  border-left-color: #0078d4;
+}
+
+.insight-text {
+  font-size: 0.875rem;
+  color: #323130;
+}
+
+/* Detailed Report Styles */
+.detailed-report .detailed-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.analysis-section,
+.trend-section,
+.forecast-section {
+  background: #fafbfc;
+  border: 1px solid #e1e5e9;
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+.transaction-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.metric {
+  text-align: center;
+  padding: 1rem;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #e1e5e9;
+}
+
+.metric-label {
+  display: block;
+  font-size: 0.75rem;
+  color: #8a8886;
+  margin-bottom: 0.5rem;
+}
+
+.metric-value {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #323130;
+}
+
+.trend-placeholder {
+  text-align: center;
+  padding: 2rem;
+  color: #8a8886;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #e1e5e9;
+}
+
+.forecast-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.forecast-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #e1e5e9;
+}
+
+.forecast-label {
+  font-size: 0.875rem;
+  color: #323130;
+  font-weight: 500;
+}
+
+.forecast-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0078d4;
+}
+
+.forecast-confidence {
+  font-size: 0.75rem;
+  color: #8a8886;
+}
+
+/* PowerBI Features Showcase */
+.powerbi-features {
+  background: white;
+  border-top: 1px solid #e1e5e9;
+  padding: 2rem 0;
+  margin-top: 2rem;
+}
+
+.features-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.features-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #323130;
+  margin-bottom: 2rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #fafbfc;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.feature-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 120, 212, 0.15);
+  border-color: #0078d4;
+}
+
+.feature-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.feature-content h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #323130;
+  margin-bottom: 0.5rem;
+}
+
+.feature-content p {
+  font-size: 0.875rem;
+  color: #605e5c;
+  line-height: 1.4;
+}
+
+/* Responsive Design for PowerBI */
+@media (max-width: 1200px) {
+  .nav-tabs {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .nav-tab {
+    width: 100%;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .dashboard-stats {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .powerbi-container {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  
+  .powerbi-toolbar {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .powerbi-toolbar-right {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .powerbi-view-toggle,
+  .powerbi-export {
+    justify-content: center;
+  }
+  
+  .report-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .global-filters {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* PowerBI Animation Effects */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.powerbi-report {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.kpi-card {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.kpi-card:nth-child(1) { animation-delay: 0.1s; }
+.kpi-card:nth-child(2) { animation-delay: 0.2s; }
+.kpi-card:nth-child(3) { animation-delay: 0.3s; }
+
+/* PowerBI Success Indicators */
+.powerbi-success-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #107c10;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* PowerBI Color Scheme */
+:root {
+  --powerbi-primary: #0078d4;
+  --powerbi-secondary: #40e0d0;
+  --powerbi-success: #107c10;
+  --powerbi-warning: #ffaa44;
+  --powerbi-danger: #d13438;
+  --powerbi-light: #fafbfc;
+  --powerbi-dark: #323130;
+  --powerbi-border: #e1e5e9;
+}
+
+/* Transaction Management Styles - Add to end of src/index.css */
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-container {
+  background: white;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.modal-header {
+  position: sticky;
+  top: 0;
+  background: white;
+  padding: 1rem 1rem 0;
+  border-bottom: 1px solid #f3f4f6;
+  z-index: 10;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #6b7280;
+  transition: all 0.2s;
+}
+
+.modal-close:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.modal-content {
+  padding: 0 1rem 1rem;
+}
+
+/* Form Styles */
+.transaction-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.form-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.form-header p {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.form-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+  background: white;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-input.error,
+.form-select.error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-hint {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.error-message {
+  font-size: 0.75rem;
+  color: #ef4444;
+  font-weight: 500;
+}
+
+/* Radio Group */
+.radio-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.radio-label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.radio-label input[type="radio"] {
+  display: none;
+}
+
+.radio-custom {
+  padding: 0.75rem 1rem;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.radio-label input[type="radio"]:checked + .radio-custom.expense {
+  border-color: #ef4444;
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.radio-label input[type="radio"]:checked + .radio-custom.income {
+  border-color: #10b981;
+  background: #f0fdf4;
+  color: #059669;
+}
+
+/* Checkbox */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.checkbox-label input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox-custom {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #d1d5db;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkbox-custom {
+  background: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkbox-custom:after {
+  content: '✓';
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Buttons */
+.form-footer {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  padding-top: 1rem;
+  border-top: 1px solid #f3f4f6;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #3b82f6;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.btn-secondary {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #e5e7eb;
+}
+
+.btn-danger {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #dc2626;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-spinner.large {
+  width: 32px;
+  height: 32px;
+  border-width: 3px;
+}
+
+/* Transaction List Styles */
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Transaction List Styles */
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.transaction-list-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  gap: 1rem;
+  color: #6b7280;
+}
+
+/* Filters */
+.transaction-filters {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.filters-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.875rem;
+}
+
+.search-icon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+}
+
+.filter-select,
+.date-input {
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  background: white;
+}
+
+.date-filters {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.refresh-btn {
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.refresh-btn:hover {
+  background: #f9fafb;
+}
+
+.results-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.selected-count {
+  color: #3b82f6;
+  font-weight: 500;
+}
+
+/* Transaction Table */
+.transaction-table-container {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transaction-table th {
+  background: #f9fafb;
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.transaction-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.transaction-table th.sortable:hover {
+  background: #f3f4f6;
+}
+
+.transaction-table th.sortable.asc:after,
+.transaction-table th.sortable.desc:after {
+  content: '';
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 4px solid transparent;
+}
+
+.transaction-table th.sortable.asc:after {
+  border-bottom-color: #374151;
+}
+
+.transaction-table th.sortable.desc:after {
+  border-top-color: #374151;
+}
+
+.transaction-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 0.875rem;
+}
+
+.transaction-row {
+  transition: background-color 0.2s;
+}
+
+.transaction-row:hover {
+  background: #f9fafb;
+}
+
+.transaction-row.selected {
+  background: #eff6ff;
+}
+
+.checkbox-cell {
+  width: 50px;
+  text-align: center;
+}
+
+.date-cell {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.category-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.category-icon {
+  font-size: 1.125rem;
+}
+
+.category-name {
+  font-weight: 500;
+  color: #374151;
+}
+
+.description-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.description-text {
+  color: #374151;
+}
+
+.description-notes {
+  color: #9ca3af;
+  cursor: help;
+}
+
+.amount-cell {
+  font-weight: 600;
+  text-align: right;
+}
+
+.amount-cell.income {
+  color: #059669;
+}
+
+.amount-cell.expense {
+  color: #dc2626;
+}
+
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.type-badge.income {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.type-badge.expense {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.actions-menu {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background: #f3f4f6;
+}
+
+.action-btn.edit:hover {
+  background: #dbeafe;
+}
+
+.action-btn.delete:hover {
+  background: #fee2e2;
+}
+
+/* Empty State */
+.no-transactions {
+  text-align: center;
+  padding: 3rem;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.empty-state p {
+  color: #6b7280;
+}
+
+/* Bulk Actions */
+.bulk-actions {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bulk-count {
+  font-size: 0.875rem;
+  color: #1e40af;
+  font-weight: 500;
+}
+
+.bulk-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .filters-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .date-filters {
+    flex-direction: column;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .transaction-table-container {
+    overflow-x: auto;
+  }
+  
+  .transaction-table {
+    min-width: 700px;
+  }
+  
+  .modal-container {
+    margin: 1rem;
+    max-height: calc(100vh - 2rem);
+  }
+  
+  .bulk-actions {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+}
