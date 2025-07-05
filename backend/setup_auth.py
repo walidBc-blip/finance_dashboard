@@ -1,4 +1,105 @@
+# backend/setup_auth.py - Quick setup script to create auth files
 
+import os
+
+# Create routes directory if it doesn't exist
+os.makedirs('app/routes', exist_ok=True)
+
+# Create __init__.py for routes
+with open('app/routes/__init__.py', 'w') as f:
+    f.write('')
+
+# Create auth.py file
+auth_py_content = '''
+from datetime import datetime, timedelta
+from typing import Optional
+from fastapi import Depends, HTTPException, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from jose import JWTError, jwt
+from passlib.context import CryptContext
+from sqlalchemy.orm import Session
+from ..database import get_database
+from ..models import User
+
+# Security configuration
+SECRET_KEY = "your-secret-key-change-in-production"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
+# Password hashing
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+# Bearer token scheme
+security = HTTPBearer()
+
+class AuthService:
+    @staticmethod
+    def verify_password(plain_password: str, hashed_password: str) -> bool:
+        """Verify a password against its hash"""
+        return pwd_context.verify(plain_password, hashed_password)
+    
+    @staticmethod
+    def get_password_hash(password: str) -> str:
+        """Hash a password"""
+        return pwd_context.hash(password)
+    
+    @staticmethod
+    def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
+        """Create a JWT access token"""
+        to_encode = data.copy()
+        if expires_delta:
+            expire = datetime.utcnow() + expires_delta
+        else:
+            expire = datetime.utcnow() + timedelta(minutes=15)
+        
+        to_encode.update({"exp": expire})
+        encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+        return encoded_jwt
+    
+    @staticmethod
+    def verify_token(token: str) -> Optional[str]:
+        """Verify and decode JWT token"""
+        try:
+            payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+            email: str = payload.get("sub")
+            if email is None:
+                return None
+            return email
+        except JWTError:
+            return None
+
+# Dependency to get current user
+def get_current_user(
+    credentials: HTTPAuthorizationCredentials = Depends(security),
+    db: Session = Depends(get_database)
+) -> User:
+    """Get current authenticated user"""
+    
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    
+    try:
+        email = AuthService.verify_token(credentials.credentials)
+        if email is None:
+            raise credentials_exception
+    except JWTError:
+        raise credentials_exception
+    
+    user = db.query(User).filter(User.email == email).first()
+    if user is None:
+        raise credentials_exception
+    
+    return user
+'''
+
+with open('app/auth.py', 'w') as f:
+    f.write(auth_py_content)
+
+# Create auth routes
+auth_routes_content = '''
 from datetime import timedelta
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
@@ -149,3 +250,16 @@ async def get_current_user_info(current_user: User = Depends(get_current_user)):
 async def logout(current_user: User = Depends(get_current_user)):
     """Logout user"""
     return {"message": "Successfully logged out"}
+'''
+
+with open('app/routes/auth.py', 'w') as f:
+    f.write(auth_routes_content)
+
+print("✅ Auth files created successfully!")
+print("📁 Created:")
+print("  - app/auth.py")
+print("  - app/routes/__init__.py") 
+print("  - app/routes/auth.py")
+print("\n🔧 Next: Add this line to your main.py:")
+print("from app.routes.auth import router as auth_router")
+print("app.include_router(auth_router)")

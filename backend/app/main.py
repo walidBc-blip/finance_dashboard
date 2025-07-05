@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 import calendar
 from sqlalchemy import text, and_, func, extract, or_
 from typing import List
+from .routes.auth import router as auth_router
 
 # Import database components
 from app.database import get_database, init_database
@@ -20,6 +21,8 @@ app = FastAPI(
     docs_url="/docs",
     redoc_url="/redoc"
 )
+
+app.include_router(auth_router)
 
 # CORS middleware - allowing both common React dev server ports
 app.add_middleware(

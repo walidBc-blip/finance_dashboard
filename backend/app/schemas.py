@@ -1,6 +1,8 @@
 from pydantic import BaseModel, EmailStr, validator
 from datetime import datetime, date
 from typing import List, Optional
+from pydantic import BaseModel, EmailStr, validator
+from typing import Optional
 
 # User schemas
 class UserBase(BaseModel):
@@ -196,3 +198,56 @@ class DatabaseInfo(BaseModel):
     engine: str
     tables: List[str]
     status: str
+
+
+
+# Authentication schemas
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+class UserRegister(BaseModel):
+    name: str
+    email: EmailStr
+    password: str
+    confirm_password: str
+    age: int
+    annual_income: float
+
+    @validator('name')
+    def validate_name(cls, v):
+        if len(v.strip()) < 2:
+            raise ValueError('Name must be at least 2 characters long')
+        return v.strip()
+    
+    @validator('password')
+    def validate_password(cls, v):
+        if len(v) < 6:
+            raise ValueError('Password must be at least 6 characters long')
+        return v
+    
+    @validator('confirm_password')
+    def passwords_match(cls, v, values, **kwargs):
+        if 'password' in values and v != values['password']:
+            raise ValueError('Passwords do not match')
+        return v
+    
+    @validator('age')
+    def validate_age(cls, v):
+        if v < 18 or v > 120:
+            raise ValueError('Age must be between 18 and 120')
+        return v
+    
+    @validator('annual_income')
+    def validate_income(cls, v):
+        if v < 0:
+            raise ValueError('Annual income must be positive')
+        return v
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+    user: UserResponse
+
+class TokenData(BaseModel):
+    email: Optional[str] = None    

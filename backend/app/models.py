@@ -4,12 +4,15 @@ from sqlalchemy.sql import func
 from datetime import datetime
 from .database import Base
 
+
+
 class User(Base):
     __tablename__ = "users"
     
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(100), nullable=False, index=True)
     email = Column(String(255), unique=True, nullable=False, index=True)
+    password_hash = Column(String(255), nullable=False)  # NEW: Add password hash
     age = Column(Integer)
     annual_income = Column(Float, nullable=False)
     monthly_income = Column(Float, nullable=False)
@@ -30,6 +33,9 @@ class User(Base):
     
     def __repr__(self):
         return f"<User(id={self.id}, name='{self.name}', email='{self.email}')>"
+
+
+# Rest of your models remain the same...
 
 class Transaction(Base):
     __tablename__ = "transactions"
@@ -187,3 +193,4 @@ class UserPreferences(Base):
     
     def __repr__(self):
         return f"<UserPreferences(user_id={self.user_id}, currency='{self.currency}', theme='{self.theme}')>"
+    
