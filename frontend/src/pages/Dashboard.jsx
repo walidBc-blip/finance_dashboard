@@ -1,3 +1,4 @@
+// frontend/src/pages/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import apiService from '../services/api';
@@ -8,8 +9,7 @@ import TransactionModal from '../components/transactions/TransactionModal';
 import TransactionList from '../components/transactions/TransactionList';
 import { useAuth } from '../contexts/AuthContext';
 
-
-function App() {
+const Dashboard = () => {
   // Main app state
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -23,8 +23,9 @@ function App() {
   const [editingTransaction, setEditingTransaction] = useState(null);
   const [transactionFormLoading, setTransactionFormLoading] = useState(false);
 
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const userId = user?.id || 1;
+
   // Enhanced fetch initial data with better error handling
   const fetchData = async () => {
     try {
@@ -303,7 +304,7 @@ function App() {
           <div className="header-left">
             <div className="logo">
               <span className="logo-icon">💰</span>
-              <h1>FinanceApp</h1>
+              <h1>SmartCents</h1>
             </div>
           </div>
           <div className="header-right">
@@ -334,8 +335,10 @@ function App() {
               </button>
             </div>
             <div className="user-info">
-              <span className="user-avatar">JD</span>
-              <span className="user-name">{data.users[0]?.name}</span>
+              <span className="user-avatar">
+                {user?.name ? user.name.split(' ').map(n => n[0]).join('').toUpperCase() : 'JD'}
+              </span>
+              <span className="user-name">{user?.name || data.users[0]?.name}</span>
               {/* Enhanced refresh button */}
               <button 
                 onClick={refreshData}
@@ -343,6 +346,14 @@ function App() {
                 title="Refresh all data"
               >
                 🔄
+              </button>
+              {/* Logout button */}
+              <button 
+                onClick={logout}
+                className="ml-2 p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                title="Logout"
+              >
+                🚪
               </button>
             </div>
           </div>
@@ -355,7 +366,7 @@ function App() {
           
           {/* Enhanced Welcome Section */}
           <section className="welcome-section">
-            <h2>Welcome back, {data.users[0]?.name.split(' ')[0]}! 👋</h2>
+            <h2>Welcome back, {user?.name?.split(' ')[0] || data.users[0]?.name.split(' ')[0]}! 👋</h2>
             <p>Here's your financial overview for today</p>
             {/* Status indicator */}
             <div className="mt-2 flex items-center space-x-4 text-sm text-gray-600">
@@ -641,7 +652,7 @@ function App() {
               <div className="banner-icon">🎉</div>
               <div className="banner-text">
                 <h3>Full-Stack Finance Dashboard Complete!</h3>
-                <p>✅ Database Connected • ✅ Real CRUD • ✅ Toast Notifications • ✅ Error Handling</p>
+                <p>✅ Database Connected • ✅ Real CRUD • ✅ Toast Notifications • ✅ Error Handling • ✅ Authentication</p>
               </div>
               <div className="banner-stats">
                 <span>Users: {data.users?.length || 0}</span>
@@ -664,6 +675,6 @@ function App() {
       />
     </div>
   );
-}
+};
 
-export default App;
+export default Dashboard;
